@@ -16,15 +16,11 @@ jobs:
 
       - name: Push to GitBucket
         env:
-          GITBUCKET_SSH_PRIVATE_KEY: ${{ secrets.GITBUCKET_SSH_PRIVATE_KEY }}
+          GITBUCKET_USERNAME: ${{ secrets.GITBUCKET_USERNAME }}
+          GITBUCKET_PASSWORD: ${{ secrets.GITBUCKET_PASSWORD }}
         run: |
-          mkdir -p ~/.ssh
-          echo "$GITBUCKET_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H your-gitbucket-instance.com >> ~/.ssh/known_hosts
-          
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           
-          git remote add gitbucket git@your-gitbucket-instance.com:username/repository.git
+          git remote add gitbucket https://$GITBUCKET_USERNAME:$GITBUCKET_PASSWORD@https://isgb.otago.ac.nz/info301/git/robja577/Test-Github-Actions.git
           git push --mirror gitbucket
