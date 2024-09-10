@@ -22,5 +22,5 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           
-          git remote add gitbucket https://$GITBUCKET_USERNAME:$GITBUCKET_PASSWORD@https://isgb.otago.ac.nz/info301/git/robja577/Test-Github-Actions.git
+          git remote add gitbucket https://$GITBUCKET_USERNAME:$GITBUCKET_PASSWORD@isgb.otago.ac.nz/info301/git/robja577/Test-Github-Actions.git
           git push --mirror gitbucket
