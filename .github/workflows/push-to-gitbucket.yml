@@ -3,7 +3,7 @@ name: Mirror to GitBucket
 on:
   push:
     branches:
-      - '*'
+      - "*"
 
 jobs:
   mirror:
@@ -16,11 +16,13 @@ jobs:
 
       - name: Push to GitBucket
         env:
+          # Set the GitBucket URL, username and password as secrets in your repository settings
+          GITBUCKET_URL: "isgb.otago.ac.nz/info301/git/robja577/Test-Github-Actions.git"
           GITBUCKET_USERNAME: ${{ secrets.GITBUCKET_USERNAME }}
           GITBUCKET_PASSWORD: ${{ secrets.GITBUCKET_PASSWORD }}
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          
-          git remote add gitbucket https://$GITBUCKET_USERNAME:$GITBUCKET_PASSWORD@isgb.otago.ac.nz/info301/git/robja577/Test-Github-Actions.git
+
+          git remote add gitbucket https://$GITBUCKET_USERNAME:$GITBUCKET_PASSWORD@$GITBUCKET_URL
           git push --mirror gitbucket
